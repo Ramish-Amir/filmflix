@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import MainPanel from './components/MainPanel';
+import SidePanel from './components/SidePanel';
 
 function App() {
+
+
+    // api key: 57004a39
+  // url: https://omdbapi.com?apikey=57004a39
+  // https://via.placeholder.com/400
+
+  // Hex: #61dbfb; RGB: (97, 219, 251)
+  // Blue hex: #282c34
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SidePanel />
+      <MainPanel />
+      {/* <MovieCard /> */}
     </div>
   );
 }

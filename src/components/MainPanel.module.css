@@ -1,0 +1,44 @@
+.mainPanel {
+    padding: 15px 30px;
+    width: 100%;
+}
+
+.searchBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(79, 91, 102);
+    border-radius: 10px;
+    color: white;
+    width: 70%;
+    padding: 8px 12px;
+    margin: auto;
+}
+
+.searchBar > input {
+    background: none;
+    border: none;
+    outline: none;
+    color: whitesmoke;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.searchBar > input::placeholder {
+    color: #282c34;
+}
+
+.searchIcon {
+    font-size: 24px;
+    font-weight: 900;
+    color: #282c34;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+}
+
+.searchIcon:hover {
+    transition: 0.3s ease-in-out;
+    transform: scale(1.5);
+}
