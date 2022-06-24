@@ -23,6 +23,15 @@
     border-radius: 12px;
 }
 
+.rating {
+    padding: 5px 8px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.5);
+    width: fit-content;
+    z-index: 10;
+    color: antiquewhite;
+}
+
 .movieContent {
     position: absolute;
     bottom: 0;
