@@ -40,7 +40,7 @@
     position: sticky;
     top: 0;
     padding: 12px 15px ;
-    color: #202329;
+    color: whitesmoke;
     background: rgb(79, 91, 102); 
     font-size: 16px;   
 }
@@ -73,7 +73,7 @@
 }
 
 .activeTab {
-    background-color: rgba(79, 91, 102, 0.4);
+    background-color: rgba(79, 91, 102, 0.5);
 }
 
 .activeTab > * {

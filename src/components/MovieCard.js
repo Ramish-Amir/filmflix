@@ -3,7 +3,6 @@ import styles from './MovieCard.module.css'
 
 function MovieCard({ movie }) {
   const baseURL = 'https://image.tmdb.org/t/p/original/'
-  console.log(movie)
 
   return (
     <div className={styles.card}
