@@ -23,6 +23,7 @@
     color: whitesmoke;
     font-size: 16px;
     padding: 8px;
+    width: 100%;
 }
 
 .searchBar > input::placeholder {

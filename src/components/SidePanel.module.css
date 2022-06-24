@@ -1,12 +1,82 @@
+* {
+    transition: 0.2s ease-in-out;
+}
+
 .sidePanelContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    border-right: 1px solid gray;
-    min-height: 100vh;
+    min-width: 300px;
+    border-right: 1px solid rgb(79, 91, 102);
+    height: 100vh;
+    padding: 0 0 15px 0;
+    overflow-y: scroll;
+}
+
+.sidePanelContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidePanelContainer::-webkit-scrollbar-track {
+    background: rgb(79, 91, 102);   
+    background: lightgray;   
+}
+
+.sidePanelContainer::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5px;
 }
 
 .panelLogo {
     width: 250px;
+    padding: 23px 8px 23px 8px;
+}
+
+.panelContent {
+    width: 100%;
+}
+
+.panelHeader {
+    position: sticky;
+    top: 0;
+    padding: 12px 15px ;
+    color: #202329;
+    background: rgb(79, 91, 102); 
+    font-size: 16px;   
+}
+
+.panelItem {
+    padding: 8px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+    margin: 8px 10px;
+    border-radius: 8px;
+}
+
+.panelItem > * {
+    color: rgba(97, 219, 251, 0.8);
+}
+
+.panelItem:hover {
+    background-color: rgba(79, 91, 102, 0.2);
+    transition: ease-in-out 0.2s;
+}
+
+.panelIcon {
+    font-size: 25px;
+    margin-right: 10px;
+
+}
+
+.activeTab {
+    background-color: rgba(79, 91, 102, 0.4);
+}
+
+.activeTab > * {
+    color: rgba(97, 219, 251, 1);
+    transition: ease-in-out 0.2s;
 }
