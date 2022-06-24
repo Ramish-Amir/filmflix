@@ -17,9 +17,7 @@ function MainPanel() {
 
             <div className={styles.cardsContainer}>
                 {
-                    movies?.map((movie) =>
-                        <MovieCard key={movie.id} movie={movie} />
-                    )
+                    movies?.length > 0 ? movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />) : <h1>No movies found</h1>
                 }
             </div>
         </div>

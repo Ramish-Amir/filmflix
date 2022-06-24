@@ -1,39 +1,144 @@
 import React, { useState } from 'react'
 import styles from './SidePanel.module.css'
 import logo from '../assets/logo.jpeg'
-import { MdTheaters, MdStar, MdGroups, MdTrendingUp, MdExplore, MdPets, MdTheaterComedy, MdRunCircle, MdVideoCameraBack, MdSentimentDissatisfied, MdFamilyRestroom, MdAutoFixHigh, MdHistoryToggleOff, MdSkateboarding, MdMusicNote, MdLiveHelp, MdFavorite, MdSatellite, MdDesktopWindows, MdExtension, MdAnchor, MdPark } from 'react-icons/md'
+import { MdTheaters, MdStar, MdGroups, MdTrendingUp, MdExplore, MdPets, MdTheaterComedy, MdRunCircle, MdVideoCameraBack, MdSentimentDissatisfied, MdFamilyRestroom, MdAutoFixHigh, MdHistoryToggleOff, MdSkateboarding, MdMusicNote, MdLiveHelp, MdFavorite, MdSatellite, MdDesktopWindows, MdExtension, MdAnchor, MdPark, MdNote } from 'react-icons/md'
+import requests from '../utils/requests'
+import axios from '../utils/axios'
+import { useDispatch } from 'react-redux'
+import { setMovies } from '../redux/actions/movieActions'
 
 function SidePanel() {
     const [selectedTab, setSelectedTab] = useState('Trending')
-    const categories = ['Trending', 'Popular', 'Top Rated', 'Up Coming']
-    const catIcons = [
-        <MdTrendingUp className={styles.panelIcon} />,
-        <MdTheaters className={styles.panelIcon} />,
-        <MdStar className={styles.panelIcon} />,
-        <MdGroups className={styles.panelIcon} />,
+    const dispatch = useDispatch()
+
+    const categories = [
+        {
+            name: 'Trending',
+            icon: <MdTrendingUp className={styles.panelIcon} />,
+            sourceURL: requests.fetchTrending
+        },
+        {
+            name: 'Popular',
+            icon: <MdTheaters className={styles.panelIcon} />,
+            sourceURL: requests.fetchPopular
+        },
+        {
+            name: 'Top Rated',
+            icon: <MdStar className={styles.panelIcon} />,
+            sourceURL: requests.fetchTopRated
+        },
+        {
+            name: 'Up Coming',
+            icon: <MdGroups className={styles.panelIcon} />,
+            sourceURL: requests.fetchUpcoming
+        }
     ]
-    const genres = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movies', 'Thriller', 'War', 'Western']
-    const genreIcons = [
-        <MdSkateboarding className={styles.panelIcon} />,
-        <MdExplore className={styles.panelIcon} />,
-        <MdPets className={styles.panelIcon} />,
-        <MdTheaterComedy className={styles.panelIcon} />,
-        <MdRunCircle className={styles.panelIcon} />,
-        <MdVideoCameraBack className={styles.panelIcon} />,
-        <MdSentimentDissatisfied className={styles.panelIcon} />,
-        <MdFamilyRestroom className={styles.panelIcon} />,
-        <MdAutoFixHigh className={styles.panelIcon} />,
-        <MdHistoryToggleOff className={styles.panelIcon} />,
-        <MdTheaterComedy className={styles.panelIcon} />,
-        <MdMusicNote className={styles.panelIcon} />,
-        <MdLiveHelp className={styles.panelIcon} />,
-        <MdFavorite className={styles.panelIcon} />,
-        <MdSatellite className={styles.panelIcon} />,
-        <MdDesktopWindows className={styles.panelIcon} />,
-        <MdExtension className={styles.panelIcon} />,
-        <MdAnchor className={styles.panelIcon} />,
-        <MdPark className={styles.panelIcon} />,
+
+    const genres = [
+        {
+            name: 'Action',
+            icon: <MdSkateboarding className={styles.panelIcon} />,
+            sourceURL: requests.fetchActionMovies
+        },
+        {
+            name: 'Adventure',
+            icon: <MdExplore className={styles.panelIcon} />,
+            sourceURL: requests.fetchAdventureMovies
+        },
+        {
+            name: 'Animation',
+            icon: <MdPets className={styles.panelIcon} />,
+            sourceURL: requests.fetchAnimationMovies
+        },
+        {
+            name: 'Comedy',
+            icon: <MdTheaterComedy className={styles.panelIcon} />,
+            sourceURL: requests.fetchComedyMovies
+        },
+        {
+            name: 'Crime',
+            icon: <MdRunCircle className={styles.panelIcon} />,
+            sourceURL: requests.fetchCrimeMovies
+        },
+        {
+            name: 'Documentary',
+            icon: <MdVideoCameraBack className={styles.panelIcon} />,
+            sourceURL: requests.fetchDocumentries
+        },
+        {
+            name: 'Drama',
+            icon: <MdSentimentDissatisfied className={styles.panelIcon} />,
+            sourceURL: requests.fetchDramaMovies
+        },
+        {
+            name: 'Family',
+            icon: <MdFamilyRestroom className={styles.panelIcon} />,
+            sourceURL: requests.fetchFamilyMovies
+        },
+        {
+            name: 'Fantasy',
+            icon: <MdAutoFixHigh className={styles.panelIcon} />,
+            sourceURL: requests.fetchFantasyMovies
+        },
+        {
+            name: 'History',
+            icon: <MdHistoryToggleOff className={styles.panelIcon} />,
+            sourceURL: requests.fetchHistoryMovies
+        },
+        {
+            name: 'Horror',
+            icon: <MdTheaterComedy className={styles.panelIcon} />,
+            sourceURL: requests.fetchHorrorMovies
+        },
+        {
+            name: 'Music',
+            icon: <MdMusicNote className={styles.panelIcon} />,
+            sourceURL: requests.fetchMusicyMovies
+        },
+        {
+            name: 'Mystery',
+            icon: <MdLiveHelp className={styles.panelIcon} />,
+            sourceURL: requests.fetchMysteryMovies
+        },
+        {
+            name: 'Romance',
+            icon: <MdFavorite className={styles.panelIcon} />,
+            sourceURL: requests.fetchRomanceMovies
+        },
+        {
+            name: 'Science Fiction',
+            icon: <MdSatellite className={styles.panelIcon} />,
+            sourceURL: requests.fetchScienceFictionMovies
+        },
+        {
+            name: 'TV Movie',
+            icon: <MdDesktopWindows className={styles.panelIcon} />,
+            sourceURL: requests.fetchTVMovieMovies
+        },
+        {
+            name: 'Thriller',
+            icon: <MdExtension className={styles.panelIcon} />,
+            sourceURL: requests.fetchThrillerMovies
+        },
+        {
+            name: 'War',
+            icon: <MdAnchor className={styles.panelIcon} />,
+            sourceURL: requests.fetchWarMovies
+        },
+        {
+            name: 'Western',
+            icon: <MdPark className={styles.panelIcon} />,
+            sourceURL: requests.fetchWesternMovies
+        }
+
     ]
+
+    const changeMovies = async (newTab, newUrl) => {
+        setSelectedTab(newTab)
+        const newResp = await axios.get(newUrl)
+        console.log(newResp)
+        dispatch(setMovies(newResp.data.results))
+    }
 
     return (
         <div className={styles.sidePanelContainer}>
@@ -43,9 +148,11 @@ function SidePanel() {
                 <div className={styles.panelHeader}>Categories</div>
 
                 {categories.map((item, index) => {
-                    return <div key={index} className={`${styles.panelItem} ${selectedTab === item && styles.activeTab}`} onClick={(e) => { setSelectedTab(item) }}>
-                        {catIcons[index]}
-                        <span className={styles.itemName}>{item}</span>
+                    return <div key={index}
+                        className={`${styles.panelItem} ${selectedTab === item.name && styles.activeTab}`}
+                        onClick={() => { changeMovies(item.name, item.sourceURL) }}>
+                        {item.icon}
+                        <span className={styles.itemName}>{item.name}</span>
                     </div>
                 })}
 
@@ -53,9 +160,11 @@ function SidePanel() {
 
                 {
                     genres.map((item, index) => {
-                        return <div key={index} className={`${styles.panelItem} ${selectedTab === item && styles.activeTab}`} onClick={(e) => { setSelectedTab(item) }}>
-                            {genreIcons[index]}
-                            <span className={styles.itemName}>{item}</span>
+                        return <div key={index}
+                            className={`${styles.panelItem} ${selectedTab === item.name && styles.activeTab}`}
+                            onClick={() => { changeMovies(item.name, item.sourceURL) }}>
+                            {item.icon}
+                            <span className={styles.itemName}>{item.name}</span>
                         </div>
                     })
                 }
