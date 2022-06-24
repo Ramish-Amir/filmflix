@@ -1,6 +1,22 @@
 .mainPanel {
     padding: 15px 30px;
     width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.mainPanel::-webkit-scrollbar {
+    width: 10px;
+}
+
+.mainPanel::-webkit-scrollbar-track {
+    background: rgb(79, 91, 102);   
+    background: lightgray;   
+}
+
+.mainPanel::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5px;
 }
 
 .searchBar {
@@ -14,9 +30,10 @@
     width: 70%;
     padding: 8px 12px;
     margin: auto;
+    margin-bottom: 8px;
 }
 
-.searchBar > input {
+.searchBar>input {
     background: none;
     border: none;
     outline: none;
@@ -26,7 +43,7 @@
     width: 100%;
 }
 
-.searchBar > input::placeholder {
+.searchBar>input::placeholder {
     color: #282c34;
 }
 
@@ -42,4 +59,12 @@
 .searchIcon:hover {
     transition: 0.3s ease-in-out;
     transform: scale(1.5);
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 50px 0;
 }

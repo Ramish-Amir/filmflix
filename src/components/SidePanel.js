@@ -4,11 +4,11 @@ import logo from '../assets/logo.jpeg'
 import { MdTheaters, MdStar, MdGroups, MdTrendingUp, MdExplore, MdPets, MdTheaterComedy, MdRunCircle, MdVideoCameraBack, MdSentimentDissatisfied, MdFamilyRestroom, MdAutoFixHigh, MdHistoryToggleOff, MdSkateboarding, MdMusicNote, MdLiveHelp, MdFavorite, MdSatellite, MdDesktopWindows, MdExtension, MdAnchor, MdPark } from 'react-icons/md'
 
 function SidePanel() {
-    const [selectedTab, setSelectedTab] = useState('Popular')
-    const categories = ['Popular', 'Trending', 'Top Rated', 'Up Coming']
+    const [selectedTab, setSelectedTab] = useState('Trending')
+    const categories = ['Trending', 'Popular', 'Top Rated', 'Up Coming']
     const catIcons = [
-        <MdTheaters className={styles.panelIcon} />,
         <MdTrendingUp className={styles.panelIcon} />,
+        <MdTheaters className={styles.panelIcon} />,
         <MdStar className={styles.panelIcon} />,
         <MdGroups className={styles.panelIcon} />,
     ]
@@ -43,7 +43,7 @@ function SidePanel() {
                 <div className={styles.panelHeader}>Categories</div>
 
                 {categories.map((item, index) => {
-                    return <div className={`${styles.panelItem} ${selectedTab === item && styles.activeTab}`} onClick={(e) => { setSelectedTab(item) }}>
+                    return <div key={index} className={`${styles.panelItem} ${selectedTab === item && styles.activeTab}`} onClick={(e) => { setSelectedTab(item) }}>
                         {catIcons[index]}
                         <span className={styles.itemName}>{item}</span>
                     </div>
@@ -53,155 +53,13 @@ function SidePanel() {
 
                 {
                     genres.map((item, index) => {
-                        return <div className={`${styles.panelItem} ${selectedTab === item && styles.activeTab}`} onClick={(e) => { setSelectedTab(item) }}>
+                        return <div key={index} className={`${styles.panelItem} ${selectedTab === item && styles.activeTab}`} onClick={(e) => { setSelectedTab(item) }}>
                             {genreIcons[index]}
                             <span className={styles.itemName}>{item}</span>
                         </div>
                     })
                 }
 
-                {/* <div className={`${styles.panelItem} ${selectedTab === 'popular' && styles.activeTab}`} onClick={(e) => { setSelectedTab('popular') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Popular</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'trending' && styles.activeTab}`} onClick={() => { setSelectedTab('trending') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Trending</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'topRated' && styles.activeTab}`} onClick={(e) => { setSelectedTab('topRated') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Top Rated</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'upComing' && styles.activeTab}`} onClick={(e) => { setSelectedTab('upComing') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Up Coming</span>
-                </div>
-
-                <div className={styles.panelHeader}>Genres</div>
-                <div className={`${styles.panelItem} ${selectedTab === 'action' && styles.activeTab}`} onClick={(e) => { setSelectedTab('action') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Action</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'adventure' && styles.activeTab}`} onClick={() => { setSelectedTab('adventure') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Adventure</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'animation' && styles.activeTab}`} onClick={(e) => { setSelectedTab('animation') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Animation</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'comedy' && styles.activeTab}`} onClick={(e) => { setSelectedTab('comedy') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Comedy</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'crime' && styles.activeTab}`} onClick={(e) => { setSelectedTab('crime') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Crome</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'trending' && styles.activeTab}`} onClick={() => { setSelectedTab('trending') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Trending</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'topRated' && styles.activeTab}`} onClick={(e) => { setSelectedTab('topRated') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Top Rated</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'upComing' && styles.activeTab}`} onClick={(e) => { setSelectedTab('upComing') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Up Coming</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'popular' && styles.activeTab}`} onClick={(e) => { setSelectedTab('popular') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Popular</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'trending' && styles.activeTab}`} onClick={() => { setSelectedTab('trending') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Trending</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'topRated' && styles.activeTab}`} onClick={(e) => { setSelectedTab('topRated') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Top Rated</span>
-                </div>
-                <div className={`${styles.panelItem} ${selectedTab === 'upComing' && styles.activeTab}`} onClick={(e) => { setSelectedTab('upComing') }}>
-                    <MdLocalActivity className={styles.panelIcon} />
-                    <span className={styles.itemName}>Up Coming</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Action</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Adventure</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Animation</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Comedy</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Crime</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Documentary</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Drama</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Family</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Fantasy</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>History</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Horror</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Music</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Mystery</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Romance</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Science Fiction</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>TV Movies</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Thriller</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>War</span>
-                </div>
-                <div className={styles.panelItem}>
-                    <MdLocalActivity className={styles.panelIcon}></MdLocalActivity>
-                    <span className={styles.itemName}>Western</span>
-                </div> */}
             </div>
         </div>
     )
