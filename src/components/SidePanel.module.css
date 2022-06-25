@@ -28,6 +28,7 @@
 }
 
 .panelLogo {
+    cursor: pointer;
     width: 250px;
     padding: 23px 8px 23px 8px;
 }

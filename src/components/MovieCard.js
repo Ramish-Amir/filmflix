@@ -1,11 +1,19 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import styles from './MovieCard.module.css'
 
 function MovieCard({ movie }) {
   const baseURL = 'https://image.tmdb.org/t/p/original/'
+  const navigate = useNavigate()
+
+  const openMovieDetails = (id, mediaType) => {
+    navigate(`/${mediaType ?? 'movie'}/${id}`)
+  }
+
 
   return (
     <div className={styles.card}
+      onClick={() => openMovieDetails(movie?.id, movie?.media_type)}
       style={{
         backgroundImage: `url(${baseURL}${movie?.poster_path})`,
         backgroundSize: 'cover'

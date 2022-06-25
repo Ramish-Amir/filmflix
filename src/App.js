@@ -5,15 +5,14 @@ import MovieDetail from './components/MovieDetail';
 import SidePanel from './components/SidePanel';
 import {useDispatch} from 'react-redux'
 import { useEffect } from 'react';
-import axios from './utils/axios'
 import requests from './utils/requests';
 import { setMovies } from './redux/actions/movieActions';
 import { fetchMoviesData } from './services/fetchService';
 
 function App() {
 
-  // Hex: #61dbfb; RGB: (97, 219, 251)
-  // Grey hex: #282c34
+  // Hex: #61dbfb; rgba(97, 219, 251,1)
+  // Grey hex: #282c34, rgba(40,44,52,1)
 
   const dispatch = useDispatch()
 
@@ -38,7 +37,7 @@ function App() {
         <SidePanel />
         <Routes>
           <Route exact path='/' element={<MainPanel />} />
-          <Route exact path='/movie/:id' element={<MovieDetail />} />
+          <Route path='/:type/:id' element={<MovieDetail />} />
         </Routes>
       </Router>
 

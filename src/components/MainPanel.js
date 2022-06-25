@@ -3,9 +3,6 @@ import styles from './MainPanel.module.css'
 import { MdSearch } from 'react-icons/md'
 import MovieCard from './MovieCard'
 import { useSelector } from 'react-redux'
-// import spinner from '../assets/spinner.gif'
-import spinner1 from '../assets/greyBgSpinner.gif'
-import spinner from '../assets/s.svg'
 import spinner2 from '../assets/220.svg'
 
 function MainPanel() {

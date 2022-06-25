@@ -31,7 +31,10 @@ const requests = {
     fetchWesternMovies: `/discover/movie?api_key=${API_KEY}&with_genres=37`,
 
     // Movie Details   
-    fetchMovie: `?api_key=${API_KEY}&language=en-US`
+    fetchDetails: `?api_key=${API_KEY}&language=en-US`,
+
+    // Similalr
+    fetchSimilarMovies: `/similar?api_key=${API_KEY}&language=en-US&page=1`
 }
 
 export default requests;

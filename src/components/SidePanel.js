@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import styles from './SidePanel.module.css'
 import logo from '../assets/logo.jpeg'
-import axios from '../utils/axios'
 import { useDispatch } from 'react-redux'
 import { setMovies } from '../redux/actions/movieActions'
 import categories from '../utils/categories'
 import genres from '../utils/genres'
 import { fetchMoviesData } from '../services/fetchService'
+import { useNavigate } from 'react-router'
 
 function SidePanel() {
     const [selectedTab, setSelectedTab] = useState('Trending')
     const dispatch = useDispatch()
-
-    
+    const navigate = useNavigate()
 
     const changeMovies = async (newTab, newUrl) => {
+        navigate('/')
         dispatch(setMovies([]))
         setSelectedTab(newTab)
         const resp = await fetchMoviesData(newUrl)
@@ -38,7 +38,7 @@ function SidePanel() {
 
     return (
         <div className={styles.sidePanelContainer}>
-            <img className={styles.panelLogo} src={logo} />
+            <img onClick={() => navigate('/')} className={styles.panelLogo} src={logo} />
 
             <div className={styles.panelContent}>
                 <div className={styles.panelHeader}>Categories</div>
