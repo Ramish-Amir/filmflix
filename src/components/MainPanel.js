@@ -3,10 +3,16 @@ import styles from './MainPanel.module.css'
 import { MdSearch } from 'react-icons/md'
 import MovieCard from './MovieCard'
 import { useSelector } from 'react-redux'
+// import spinner from '../assets/spinner.gif'
+import spinner1 from '../assets/greyBgSpinner.gif'
+import spinner from '../assets/s.svg'
+import spinner2 from '../assets/220.svg'
 
 function MainPanel() {
     const movies = useSelector((state) => state.moviesList.movies)
     const [input, setInput] = useState('')
+
+    useEffect(() => { }, [movies])
 
     return (
         <div className={styles.mainPanel}>
@@ -17,7 +23,9 @@ function MainPanel() {
 
             <div className={styles.cardsContainer}>
                 {
-                    movies?.length > 0 ? movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />) : <h1>No movies found</h1>
+                    movies === 'No movies found' ? <h1 className='noMovies'>No movies found</h1> :
+                        (movies?.length > 0 ? movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+                            : <img src={spinner2} alt='Loading data' />)
                 }
             </div>
         </div>

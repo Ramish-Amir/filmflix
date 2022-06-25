@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setMovies } from '../redux/actions/movieActions'
 import categories from '../utils/categories'
 import genres from '../utils/genres'
+import { fetchMoviesData } from '../services/fetchService'
 
 function SidePanel() {
     const [selectedTab, setSelectedTab] = useState('Trending')
@@ -16,8 +17,12 @@ function SidePanel() {
     const changeMovies = async (newTab, newUrl) => {
         dispatch(setMovies([]))
         setSelectedTab(newTab)
-        const newResp = await axios.get(newUrl)
-        dispatch(setMovies(newResp.data.results))
+        const resp = await fetchMoviesData(newUrl)
+        if (resp.status === 200 && (resp.data?.results)?.length > 0) {
+            dispatch(setMovies(resp?.data?.results))
+          } else {
+            dispatch(setMovies('No movies found'))
+          }
     }
 
     const renderSideTabs = (items) => {

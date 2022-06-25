@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import axios from './utils/axios'
 import requests from './utils/requests';
 import { setMovies } from './redux/actions/movieActions';
+import { fetchMoviesData } from './services/fetchService';
 
 function App() {
 
@@ -21,13 +22,13 @@ function App() {
   },[])
 
   const fetchMovies = async() => {
-    const resp = await axios.get(requests.fetchTrending)
-    if (resp.status === 200 && resp.data?.results?.length > 0) {
+    dispatch(setMovies([]))
+    const resp = await fetchMoviesData(requests.fetchTrending)
+    if (resp.status === 200 && (resp.data?.results)?.length > 0) {
       dispatch(setMovies(resp?.data?.results))
     } else {
       dispatch(setMovies('No movies found'))
     }
-    
   }
 
 

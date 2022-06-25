@@ -11,7 +11,7 @@ function MovieCard({ movie }) {
         backgroundSize: 'cover'
       }}>
       <div className={styles.overlay} />
-      <div className={styles.rating}>{movie?.vote_average}</div>
+      <div className={styles.rating}>{Math.round(movie?.vote_average * 10) / 10}</div>
       <div className={styles.releaseYear}>{movie?.year}</div>
       <div className={styles.movieContent}>
         <div className={styles.type}>{movie?.media_type}</div>
