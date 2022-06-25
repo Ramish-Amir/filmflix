@@ -22,7 +22,12 @@ function App() {
 
   const fetchMovies = async() => {
     const resp = await axios.get(requests.fetchTrending)
-    dispatch(setMovies(resp?.data?.results))
+    if (resp.status === 200 && resp.data?.results?.length > 0) {
+      dispatch(setMovies(resp?.data?.results))
+    } else {
+      dispatch(setMovies('No movies found'))
+    }
+    
   }
 
 
