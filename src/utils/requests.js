@@ -33,8 +33,10 @@ const requests = {
     // Movie Details   
     fetchDetails: `?api_key=${API_KEY}&language=en-US`,
 
-    // Similalr
-    fetchSimilarMovies: `/similar?api_key=${API_KEY}&language=en-US&page=1`
+    // Similar
+    // Example (TV Season): https://api.themoviedb.org/3/tv/92830/similar?api_key=24cb94607368df42013bedbca1536730&language=en-US&page=1
+    // Example (Movies): https://api.themoviedb.org/3/movie/453395/similar?api_key=24cb94607368df42013bedbca1536730&language=en-US&page=1
+    fetchSimilar: `/similar?api_key=${API_KEY}&language=en-US&page=1`
 }
 
 export default requests;

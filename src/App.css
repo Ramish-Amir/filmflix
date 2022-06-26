@@ -12,3 +12,17 @@
   color: antiquewhite;
   font-weight: normal;
 }
+
+.preloadContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}
+
+.preloader {
+  width: 200px;
+  margin: auto;
+}

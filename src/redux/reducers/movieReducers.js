@@ -16,3 +16,12 @@ export const moviesReducer = (state = initialMoviesState, { type, payload }) => 
             return state
     }
 }
+
+export const currentMovieReducer = (state = [], {type, payload}) => {
+    switch (type) {
+        case ActionTypes.SET_CURRENT_MOVIE:
+            return { ...state, payload }
+        default:
+            return state
+    }
+}
