@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import styles from './MovieDetail.module.css'
 import requests from '../utils/requests'
-import { MdArrowBack, MdStar, MdCalendarToday, MdTimer, MdLanguage } from 'react-icons/md'
+import { MdArrowBack, MdStar, MdCalendarToday, MdTimer, MdLanguage, MdLiveTv } from 'react-icons/md'
 
 
 function MovieDetail() {
@@ -23,7 +23,7 @@ function MovieDetail() {
     const sourceURL = await `${params.type}/${params.id}${requests.fetchDetails}`
     const resp = await axios.get(sourceURL)
     setMovie(resp?.data)
-    // console.log(resp?.data)
+    console.log(resp?.data)
   }
 
   const renderGenreTabs = (genres) => {
@@ -43,9 +43,9 @@ function MovieDetail() {
       <div className={styles.contentWrap}>
         <div className={styles.content}>
           <div className={styles.title}>
-            {movie?.title}
+            {movie?.title ?? movie?.name}
             <br />
-            ({(movie?.release_date)?.substring(0, 4)})
+            ({(movie?.release_date ?? movie?.first_air_date)?.substring(0, 4)})
           </div>
           <div className={styles.tagline}>{movie?.tagline}</div>
 
@@ -54,13 +54,18 @@ function MovieDetail() {
               <MdStar className={styles.metaIcon} />
               <span>{Math.round(movie?.vote_average * 10) / 10}</span>
             </div>
-            <div className={styles.metaItem}>
-              <MdTimer className={styles.metaIcon} />
-              <span>{movie?.runtime} min</span>
-            </div>
+            {movie?.runtime ?
+              <div className={styles.metaItem}>
+                <MdTimer className={styles.metaIcon} />
+                <span>{movie?.runtime} min</span>
+              </div>
+              : <div className={styles.metaItem}>
+                <MdLiveTv className={styles.metaIcon} />
+                <span>{movie?.number_of_seasons} {(movie?.number_of_seasons > 1) ? `Seasons` : `Season`}</span>
+              </div>}
             <div className={styles.metaItem}>
               <MdCalendarToday className={styles.metaIcon} />
-              <span>{movie?.release_date}</span>
+              <span>{movie?.release_date ?? movie?.first_air_date}</span>
             </div>
             <div className={styles.metaItem}>
               <MdLanguage className={styles.metaIcon} />
