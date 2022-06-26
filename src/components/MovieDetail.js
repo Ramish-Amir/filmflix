@@ -47,7 +47,7 @@ function MovieDetail() {
   return (
     <div className={styles.container}>
       <div className={styles.navBar}>
-        <div onClick={() => navigate('/')} className={styles.back}>
+        <div onClick={() => navigate(-1)} className={styles.back}>
           <MdArrowBack className={styles.backIcon} />
         </div>
         {!loadingDetails && <div className={styles.navTitle}>{movie?.title ?? movie?.name}</div>}
@@ -70,15 +70,15 @@ function MovieDetail() {
                 <MdStar className={styles.metaIcon} />
                 <span>{Math.round(movie?.vote_average * 10) / 10}</span>
               </div>
-              {movie?.runtime ?
+              {movie?.runtime &&
                 <div className={styles.metaItem}>
                   <MdTimer className={styles.metaIcon} />
                   <span>{movie?.runtime} min</span>
-                </div>
-                : <div className={styles.metaItem}>
-                  <MdLiveTv className={styles.metaIcon} />
-                  <span>{movie?.number_of_seasons} {(movie?.number_of_seasons > 1) ? `Seasons` : `Season`}</span>
                 </div>}
+              {movie?.number_of_seasons && <div className={styles.metaItem}>
+                <MdLiveTv className={styles.metaIcon} />
+                <span>{movie?.number_of_seasons} {(movie?.number_of_seasons > 1) ? `Seasons` : `Season`}</span>
+              </div>}
               <div className={styles.metaItem}>
                 <MdCalendarToday className={styles.metaIcon} />
                 <span>{movie?.release_date ?? movie?.first_air_date}</span>
@@ -117,7 +117,7 @@ function MovieDetail() {
             :
             <div className={styles.similarMovies}>
               {similarMovies.map((movie) =>
-              <MovieCard key={movie.id} movie={movie} />)}
+                <MovieCard key={movie.id} movie={movie} />)}
             </div>
         }
       </div>
