@@ -18,25 +18,26 @@ function MovieDetail() {
   const baseURL = 'https://image.tmdb.org/t/p/original/'
 
   useEffect(() => {
+    const fetchMovieDetails = async () => {
+      setLoadingDetails(true)
+      const sourceURL = await `${params.type}/${params.id}${requests.fetchDetails}`
+      const resp = await axios.get(sourceURL)
+      setMovie(resp?.data)
+      setLoadingDetails(false)
+    }
+  
+    const fetchSimilar = async () => {
+      setLoadingSimilar(true)
+      const similarURL = await `${params.type}/${params.id}${requests.fetchSimilar}`
+      const resp = await axios.get(similarURL)
+      setSimilarMovies(resp?.data?.results)
+      setLoadingSimilar(false)
+    }
     fetchMovieDetails()
     fetchSimilar()
   }, [params])
 
-  const fetchMovieDetails = async () => {
-    setLoadingDetails(true)
-    const sourceURL = await `${params.type}/${params.id}${requests.fetchDetails}`
-    const resp = await axios.get(sourceURL)
-    setMovie(resp?.data)
-    setLoadingDetails(false)
-  }
-
-  const fetchSimilar = async () => {
-    setLoadingSimilar(true)
-    const similarURL = await `${params.type}/${params.id}${requests.fetchSimilar}`
-    const resp = await axios.get(similarURL)
-    setSimilarMovies(resp?.data?.results)
-    setLoadingSimilar(false)
-  }
+  
 
   const renderGenreTabs = (genres) => {
     return genres?.map((genre) =>

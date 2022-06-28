@@ -6,3 +6,10 @@ export const setMovies = (movies) => {
         payload: movies
     }
 }
+
+export const setOpenSidebar = (isOpen) => {
+    return {
+        type: ActionTypes.SET_OPEN_SIDEBAR,
+        payload: isOpen
+    }
+}

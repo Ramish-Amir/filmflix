@@ -10,3 +10,12 @@ export const moviesReducer = (state = initialMoviesState, { type, payload }) => 
             return state
     }
 }
+
+export const sidebarReducer = (state=false, {type, payload}) => {
+    switch (type) {
+        case ActionTypes.SET_OPEN_SIDEBAR:
+            return payload
+        default:
+            return state
+    }
+}

@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import { currentMovieReducer, moviesReducer } from "./movieReducers";
+import { moviesReducer, sidebarReducer } from "./movieReducers";
 
 const reducers = combineReducers({
     moviesList: moviesReducer,
+    isOpenSidebar: sidebarReducer
 })
 
 export default reducers

@@ -26,3 +26,14 @@
   width: 200px;
   margin: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  .mainPanel {
+      padding: 0 0 15px;
+  }
+
+  .searchBar {
+      width: calc(100% - 50px);
+      margin: 30px auto 0;
+  }
+}

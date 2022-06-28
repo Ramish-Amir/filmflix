@@ -10,7 +10,8 @@
     border-right: 1px solid rgb(79, 91, 102);
     height: 100vh;
     padding: 0 0 15px 0;
-    overflow-y: scroll;
+    overflow-y: auto;
+    background-color: #282c34;
 }
 
 .sidePanelContainer::-webkit-scrollbar {
@@ -18,8 +19,8 @@
 }
 
 .sidePanelContainer::-webkit-scrollbar-track {
-    background: rgb(79, 91, 102);   
-    background: lightgray;   
+    background: rgb(79, 91, 102);
+    background: lightgray;
 }
 
 .sidePanelContainer::-webkit-scrollbar-thumb {
@@ -40,10 +41,10 @@
 .panelHeader {
     position: sticky;
     top: 0;
-    padding: 12px 15px ;
+    padding: 12px 15px;
     color: whitesmoke;
-    background: rgb(79, 91, 102); 
-    font-size: 16px;   
+    background: rgb(79, 91, 102);
+    font-size: 16px;
 }
 
 .panelItem {
@@ -58,7 +59,7 @@
     border-radius: 8px;
 }
 
-.panelItem > * {
+.panelItem>* {
     color: rgba(97, 219, 251, 0.8);
 }
 
@@ -76,7 +77,33 @@
     background-color: rgba(79, 91, 102, 0.5);
 }
 
-.activeTab > * {
+.activeTab>* {
     color: rgba(97, 219, 251, 1);
     transition: ease-in-out 0.2s;
+}
+
+/* ------------ Responsive View -------- */
+
+@media only screen and (max-width: 768px) {
+    .sidePanelContainer {
+        position: fixed;
+        top: 75px;
+        z-index: 100;
+        width: 100%;
+        background-color: #282c34;
+        left: -100%;
+        transition: 0.3s ease-in;
+
+    }
+
+    .sidePanelContainerSmall {
+
+        box-shadow: 0 0 10px rgba(79, 91, 102, 0.5);
+        left: 0;
+        transition: 0.3s ease-in;
+    }
+
+    .sidePanelContainer::-webkit-scrollbar {
+        display: none;
+    }
 }

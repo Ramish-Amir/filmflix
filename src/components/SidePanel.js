@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './SidePanel.module.css'
 import logo from '../assets/logo.jpeg'
-import { useDispatch } from 'react-redux'
-import { setMovies } from '../redux/actions/movieActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMovies, setOpenSidebar } from '../redux/actions/movieActions'
 import categories from '../utils/categories'
 import genres from '../utils/genres'
 import { fetchMoviesData } from '../services/fetchService'
@@ -10,10 +10,17 @@ import { useNavigate } from 'react-router'
 
 function SidePanel() {
     const [selectedTab, setSelectedTab] = useState('Trending')
+    const [smallView, setSmallView] = useState()
+    const isOpenSidebar = useSelector(state => state.isOpenSidebar)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    useEffect(() => {
+        handleResize()
+    },[])
+
     const changeMovies = async (newTab, newUrl) => {
+        dispatch(setOpenSidebar(false))
         navigate('/')
         dispatch(setMovies([]))
         setSelectedTab(newTab)
@@ -36,9 +43,19 @@ function SidePanel() {
         ))
     }
 
+    const handleResize = () => {
+        if (window.innerWidth <= 768) {
+            setSmallView(true)
+        } else {
+            setSmallView(false)
+        }
+    }
+
+    window.addEventListener('resize', handleResize)
+
     return (
-        <div className={styles.sidePanelContainer}>
-            <img onClick={() => navigate('/')} className={styles.panelLogo} src={logo} />
+        <div className={`${styles.sidePanelContainer} ${isOpenSidebar && styles.sidePanelContainerSmall} `}>
+            {!smallView && <img onClick={() => navigate('/')} className={styles.panelLogo} src={logo} alt='logo' />}
 
             <div className={styles.panelContent}>
                 <div className={styles.panelHeader}>Categories</div>
