@@ -3,11 +3,14 @@ import './App.css';
 import MainPanel from './components/MainPanel';
 import MovieDetail from './components/MovieDetail';
 import SidePanel from './components/SidePanel';
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
 import requests from './utils/requests';
-import { setMovies } from './redux/actions/movieActions';
+import { setMovies, setOpenSidebar } from './redux/actions/movieActions';
 import { fetchMoviesData } from './services/fetchService';
+import { MdClose, MdMenu } from 'react-icons/md';
+import logo from './assets/logo.jpeg'
+
 
 function App() {
 
@@ -15,8 +18,12 @@ function App() {
   // Grey hex: #282c34, rgba(40,44,52,1)
 
   const dispatch = useDispatch()
+  const isOpenSidebar = useSelector(state => state.isOpenSidebar)
+  const [smallView, setSmallView] = useState()
+
  
   useEffect(() => {
+    handleResize()
     const fetchMovies = async () => {
       dispatch(setMovies([]))
       const resp = await fetchMoviesData(requests.fetchTrending)
@@ -30,11 +37,31 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleSidebar = () => {
+    dispatch(setOpenSidebar(!isOpenSidebar))
+}
+
+const handleResize = () => {
+    if (window.innerWidth <= 768) {
+        setSmallView(true)
+    } else {
+        setSmallView(false)
+    }
+}
+
+window.addEventListener('resize', handleResize)
+
 
   return (
     <div className="App">
       <Router>
         <SidePanel />
+        {smallView && <div className={'navBar'}>
+                {isOpenSidebar ? <MdClose onClick={handleSidebar} className={'menuIcon'} alt='Close menu' />
+                :
+                <MdMenu onClick={handleSidebar} className={'menuIcon'} alt='Open menu' />}
+                <img className={'panelLogo'} src={logo} alt='logo' />
+            </div>}
         <Routes>
           <Route exact path='/' element={<MainPanel />} />
           <Route path='/:type/:id' element={<MovieDetail />} />

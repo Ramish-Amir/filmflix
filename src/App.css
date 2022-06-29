@@ -27,6 +27,41 @@
   margin: auto;
 }
 
+.navBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+
+}
+
+.menuIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 30px;
+  color: rgba(97, 219, 251, 1);
+  cursor: pointer;
+
+}
+
+.panelLogo {
+  cursor: pointer;
+  width: 220px;
+  padding: 23px 8px;
+  margin: 0 35px;
+}
+
+
+
 @media only screen and (max-width: 768px) {
   .mainPanel {
       padding: 0 0 15px;

@@ -46,6 +46,14 @@
 .navTitle {
     font-size: 24px;
     color: antiquewhite;
+    text-align: center;
+}
+
+.contentWrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 30px;
 }
 
 .posterContainer {
@@ -61,14 +69,6 @@
     background-color: rgb(79, 91, 102);
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(97, 219, 251, 1);
-}
-
-
-.contentWrap {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 30px;
 }
 
 .content {
@@ -101,6 +101,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     width: 100%;
     margin: 20px 0 20px;
 }
@@ -113,6 +114,7 @@
     min-width: 100px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 5px;
 }
 
 .metaIcon {
@@ -121,7 +123,7 @@
     margin-bottom: 10px;
 }
 
-.metaItem > span {
+.metaItem>span {
     text-align: center;
     color: antiquewhite;
     text-transform: capitalize;
@@ -141,9 +143,9 @@
     border-radius: 8px;
     min-width: 100px;
     text-align: center;
-    background: rgb(1,117,113);
-    border: 2px solid rgb(145,201,187);
-    color: rgb(145,201,187);
+    background: rgb(1, 117, 113);
+    border: 2px solid rgb(145, 201, 187);
+    color: rgb(145, 201, 187);
     margin: 5px;
 }
 
@@ -152,10 +154,11 @@
     font-size: 24px;
 }
 
-.overview > p {
+.overview>p {
     font-size: 16px;
     color: aliceblue;
     margin-top: 0;
+    text-align: justify;
 }
 
 .similarContainer {
@@ -167,11 +170,12 @@
     padding: 30px 0;
 }
 
-.similarContainer > h2 {
+.similarContainer>h2 {
     color: antiquewhite;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     margin: 10px auto;
+    text-align: center;
 }
 
 .similarMovies {
@@ -182,3 +186,34 @@
     align-items: center;
 }
 
+
+@media screen and (max-width: 768px) {
+    .container {
+        margin-top: 75px;
+    }
+
+    .navBar {
+        display: none;
+    }
+
+    .contentWrap {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .posterContainer {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .poster {
+        width: calc(100% - 15px);
+        max-width: 350px;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .overview {}
+}

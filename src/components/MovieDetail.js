@@ -53,6 +53,7 @@ function MovieDetail() {
         </div>
         {!loadingDetails && <div className={styles.navTitle}>{movie?.title ?? movie?.name}</div>}
       </div>
+      
       {loadingDetails
         ? <div className='preloadContainer'>
           <img src={spinner2} className='preloader' alt='Loading data' />

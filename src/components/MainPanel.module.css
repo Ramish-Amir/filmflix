@@ -104,6 +104,7 @@
 
 @media only screen and (max-width: 768px) {
     .mainPanel {
+        margin-top: 75px;
         padding: 0 0 15px;
     }
 
