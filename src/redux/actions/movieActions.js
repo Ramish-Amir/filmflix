@@ -7,6 +7,13 @@ export const setMovies = (movies) => {
     }
 }
 
+export const setError = (error) => {
+    return {
+        type: ActionTypes.SET_ERROR,
+        payload: error
+    }
+}
+
 export const setOpenSidebar = (isOpen) => {
     return {
         type: ActionTypes.SET_OPEN_SIDEBAR,

@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import { moviesReducer, sidebarReducer } from "./movieReducers";
+import { errorReducer, moviesReducer, sidebarReducer } from "./movieReducers";
 
 const reducers = combineReducers({
     moviesList: moviesReducer,
+    errorOccured: errorReducer,
     isOpenSidebar: sidebarReducer
 })
 

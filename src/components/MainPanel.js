@@ -11,6 +11,7 @@ import { setMovies } from '../redux/actions/movieActions'
 
 function MainPanel() {
     const movies = useSelector((state) => state.moviesList.movies)
+    const errorOccured = useSelector((state) => state.errorOccured)
     const dispatch = useDispatch()
     const [input, setInput] = useState('')
 
@@ -42,9 +43,13 @@ function MainPanel() {
 
             <div className={styles.cardsContainer}>
                 {
-                    movies === 'No movies found' ? <h1 className='noMovies'>No movies found</h1> :
+                    !errorOccured && (movies === 'No movies found' ? <h1 className='noMovies'>No movies found</h1> :
                         (movies?.length > 0 ? movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />)
-                            : <img src={spinner2} alt='Loading data' />)
+                            : <img src={spinner2} alt='Loading data' />))
+                }
+
+                {
+                    errorOccured && <h1 className='noMovies'>Something went wrong</h1>
                 }
             </div>
         </div>

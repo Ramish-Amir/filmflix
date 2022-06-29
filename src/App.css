@@ -11,6 +11,7 @@
 .noMovies {
   color: antiquewhite;
   font-weight: normal;
+  margin: auto;
 }
 
 .preloadContainer {

@@ -6,7 +6,6 @@
     overflow-y: auto;
 }
 
-
 .navBar {
     position: sticky;
     top: 0;
@@ -214,6 +213,4 @@
     .content {
         width: 100%;
     }
-
-    .overview {}
 }

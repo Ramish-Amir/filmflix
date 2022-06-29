@@ -11,6 +11,8 @@ import MovieCard from './MovieCard'
 function MovieDetail() {
   const [movie, setMovie] = useState({})
   const [similarMovies, setSimilarMovies] = useState([])
+  const [detailsError, setDetailsError] = useState(false)
+  const [similarError, setSimilarError] = useState(false)
   const [loadingDetails, setLoadingDetails] = useState(true)
   const [loadingSimilar, setLoadingSimilar] = useState(true)
   const params = useParams()
@@ -21,23 +23,33 @@ function MovieDetail() {
     const fetchMovieDetails = async () => {
       setLoadingDetails(true)
       const sourceURL = await `${params.type}/${params.id}${requests.fetchDetails}`
-      const resp = await axios.get(sourceURL)
-      setMovie(resp?.data)
-      setLoadingDetails(false)
+      try {
+        const resp = await axios.get(sourceURL)
+        setMovie(resp?.data)
+        setLoadingDetails(false)
+      } catch (err) {
+        setDetailsError(true)
+        setLoadingDetails(false)
+      }
     }
-  
+
     const fetchSimilar = async () => {
       setLoadingSimilar(true)
       const similarURL = await `${params.type}/${params.id}${requests.fetchSimilar}`
-      const resp = await axios.get(similarURL)
-      setSimilarMovies(resp?.data?.results)
-      setLoadingSimilar(false)
+      try {
+        const resp = await axios.get(similarURL)
+        setSimilarMovies(resp?.data?.results)
+        setLoadingSimilar(false)
+      } catch (err) {
+        setSimilarError(true)
+        setLoadingSimilar(false)
+      }
     }
     fetchMovieDetails()
     fetchSimilar()
   }, [params])
 
-  
+
 
   const renderGenreTabs = (genres) => {
     return genres?.map((genre) =>
@@ -53,8 +65,12 @@ function MovieDetail() {
         </div>
         {!loadingDetails && <div className={styles.navTitle}>{movie?.title ?? movie?.name}</div>}
       </div>
-      
-      {loadingDetails
+
+      {
+        detailsError  && <h1 className='noMovies'>Something went wrong</h1>
+      }
+
+      {!detailsError && (loadingDetails
         ? <div className='preloadContainer'>
           <img src={spinner2} className='preloader' alt='Loading data' />
         </div>
@@ -105,10 +121,10 @@ function MovieDetail() {
           <div className={styles.posterContainer}>
             <img className={styles.poster} src={`${baseURL}${movie?.poster_path}`} alt={movie?.name ?? movie?.title} />
           </div>
-        </div>}
+        </div>)}
 
 
-      <div className={styles.similarContainer}>
+      {!similarError && <div className={styles.similarContainer}>
         <h2>You might also like</h2>
         {
           loadingSimilar
@@ -122,7 +138,7 @@ function MovieDetail() {
                 <MovieCard key={movie.id} movie={movie} />)}
             </div>
         }
-      </div>
+      </div>}
     </div>
   )
 }

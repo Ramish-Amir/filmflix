@@ -2,44 +2,51 @@ import React, { useEffect, useState } from 'react'
 import styles from './SidePanel.module.css'
 import logo from '../assets/logo.jpeg'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMovies, setOpenSidebar } from '../redux/actions/movieActions'
+import { setError, setMovies, setOpenSidebar } from '../redux/actions/movieActions'
 import categories from '../utils/categories'
 import genres from '../utils/genres'
-import { fetchMoviesData } from '../services/fetchService'
 import { useNavigate } from 'react-router'
+import axios from '../utils/axios'
 
 function SidePanel() {
     const [selectedTab, setSelectedTab] = useState('Trending')
     const [smallView, setSmallView] = useState()
     const isOpenSidebar = useSelector(state => state.isOpenSidebar)
+    const errorOccured = useSelector(state => state.errorOccured)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
         handleResize()
-    },[])
+    }, [])
 
     const changeMovies = async (newTab, newUrl) => {
         dispatch(setOpenSidebar(false))
         navigate('/')
         dispatch(setMovies([]))
         setSelectedTab(newTab)
-        const resp = await fetchMoviesData(newUrl)
-        if (resp.status === 200 && (resp.data?.results)?.length > 0) {
-            dispatch(setMovies(resp?.data?.results))
-          } else {
-            dispatch(setMovies('No movies found'))
-          }
+        try {
+            const resp = await axios.get(newUrl)
+            if (resp.status === 200 && (resp.data?.results)?.length > 0) {
+                dispatch(setMovies(resp?.data?.results))
+            } else {
+                dispatch(setMovies('No movies found'))
+            }
+        } catch (error) {
+            dispatch(setError(true))
+            console.log(errorOccured)
+        }
     }
 
     const renderSideTabs = (items) => {
         return items.map((item, index) => (
             <div key={index}
-                        className={`${styles.panelItem} ${selectedTab === item.name && styles.activeTab}`}
-                        onClick={() => { changeMovies(item.name, item.sourceURL) }}>
-                        {item.icon}
-                        <span className={styles.itemName}>{item.name}</span>
-                    </div>
+                className={`${styles.panelItem} ${selectedTab === item.name && styles.activeTab}`}
+                onClick={() => { changeMovies(item.name, item.sourceURL) }}>
+                {item.icon}
+                <span className={styles.itemName}>{item.name}</span>
+            </div>
         ))
     }
 

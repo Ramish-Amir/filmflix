@@ -6,10 +6,10 @@ import SidePanel from './components/SidePanel';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react';
 import requests from './utils/requests';
-import { setMovies, setOpenSidebar } from './redux/actions/movieActions';
-import { fetchMoviesData } from './services/fetchService';
+import { setError, setMovies, setOpenSidebar } from './redux/actions/movieActions';
 import { MdClose, MdMenu } from 'react-icons/md';
 import logo from './assets/logo.jpeg'
+import axios from './utils/axios';
 
 
 function App() {
@@ -21,16 +21,19 @@ function App() {
   const isOpenSidebar = useSelector(state => state.isOpenSidebar)
   const [smallView, setSmallView] = useState()
 
- 
   useEffect(() => {
     handleResize()
     const fetchMovies = async () => {
       dispatch(setMovies([]))
-      const resp = await fetchMoviesData(requests.fetchTrending)
-      if (resp.status === 200 && (resp.data?.results)?.length > 0) {
-        dispatch(setMovies(resp?.data?.results))
-      } else {
-        dispatch(setMovies('No movies found jka'))
+      try {
+        const resp = await axios.get(requests.fetchTrending)
+        if (resp.status === 200 && (resp.data?.results)?.length > 0) {
+          dispatch(setMovies(resp?.data?.results))
+        } else {
+          dispatch(setMovies('No movies found'))
+        }
+      } catch (error) {
+        dispatch(setError(true))
       }
     }
     fetchMovies()
@@ -39,17 +42,17 @@ function App() {
 
   const handleSidebar = () => {
     dispatch(setOpenSidebar(!isOpenSidebar))
-}
+  }
 
-const handleResize = () => {
+  const handleResize = () => {
     if (window.innerWidth <= 768) {
-        setSmallView(true)
+      setSmallView(true)
     } else {
-        setSmallView(false)
+      setSmallView(false)
     }
-}
+  }
 
-window.addEventListener('resize', handleResize)
+  window.addEventListener('resize', handleResize)
 
 
   return (
@@ -57,11 +60,11 @@ window.addEventListener('resize', handleResize)
       <Router>
         <SidePanel />
         {smallView && <div className={'navBar'}>
-                {isOpenSidebar ? <MdClose onClick={handleSidebar} className={'menuIcon'} alt='Close menu' />
-                :
-                <MdMenu onClick={handleSidebar} className={'menuIcon'} alt='Open menu' />}
-                <img className={'panelLogo'} src={logo} alt='logo' />
-            </div>}
+          {isOpenSidebar ? <MdClose onClick={handleSidebar} className={'menuIcon'} alt='Close menu' />
+            :
+            <MdMenu onClick={handleSidebar} className={'menuIcon'} alt='Open menu' />}
+          <img className={'panelLogo'} src={logo} alt='logo' />
+        </div>}
         <Routes>
           <Route exact path='/' element={<MainPanel />} />
           <Route path='/:type/:id' element={<MovieDetail />} />
